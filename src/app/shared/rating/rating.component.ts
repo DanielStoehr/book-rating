@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'br-rating',
@@ -6,16 +6,17 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./rating.component.scss'],
   standalone: true,
 })
-export class RatingComponent implements OnInit {
+export class RatingComponent implements OnChanges {
   @Input() value?: number;
   displayedText: string = '';
 
-  ngOnInit() {
+  ngOnChanges() {
     this.generateText();
   }
 
   generateText() {
     if (!this.value) return;
+    this.displayedText = '';
     let roundedValue = Math.floor(this.value);
     for (let i = 0; i < roundedValue; i++) {
       this.displayedText += '*';

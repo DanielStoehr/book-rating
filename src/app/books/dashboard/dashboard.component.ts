@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Book } from '../shared/book';
+import { BookRatingService } from '../shared/book-rating.service';
 
 @Component({
   selector: 'br-dashboard',
@@ -9,7 +10,7 @@ import { Book } from '../shared/book';
 export class DashboardComponent {
   books: Book[] = [];
 
-  constructor() {
+  constructor(private rs: BookRatingService) {
     this.books = [
       {
         isbn: '123',
@@ -26,5 +27,22 @@ export class DashboardComponent {
         price: 36.9,
       },
     ];
+  }
+
+  doRateUp(book: Book) {
+    const ratedBook = this.rs.rateUp(book);
+    this.updateList(ratedBook);
+  }
+
+  doRateDown(book: Book) {
+    const ratedBook = this.rs.rateDown(book);
+    this.updateList(ratedBook);
+  }
+
+  private updateList(ratedBook: Book) {
+    this.books = this.books.map((b) => {
+      if (b.isbn === ratedBook.isbn) return ratedBook;
+      return b;
+    });
   }
 }
