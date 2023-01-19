@@ -8,7 +8,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class RatingComponent implements OnChanges {
   @Input() value?: number;
-  displayedText: string = '';
+  displayedText = '';
 
   ngOnChanges() {
     this.generateText();
@@ -17,7 +17,7 @@ export class RatingComponent implements OnChanges {
   generateText() {
     if (!this.value) return;
     this.displayedText = '';
-    let roundedValue = Math.floor(this.value);
+    const roundedValue = Math.floor(this.value);
     for (let i = 0; i < roundedValue; i++) {
       this.displayedText += '*';
     }

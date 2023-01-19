@@ -10,6 +10,8 @@ export class BookComponent {
   @Input() book?: Book;
   @Output() rateUp = new EventEmitter<Book>();
   @Output() rateDown = new EventEmitter<Book>();
+  @Input() minRating?: number;
+  @Input() maxRating?: number;
 
   doRateUp() {
     this.rateUp.emit(this.book);
