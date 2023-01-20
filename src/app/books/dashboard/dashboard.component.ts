@@ -8,11 +8,9 @@ import { BookRatingService } from '../shared/book-rating.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  minRating?: number;
-  maxRating?: number;
   books: Book[] = [];
 
-  constructor(private rs: BookRatingService) {
+  constructor(public rs: BookRatingService) {
     this.books = [
       {
         isbn: '123',
@@ -29,8 +27,6 @@ export class DashboardComponent {
         price: 36.9,
       },
     ];
-    this.minRating = rs.getMin();
-    this.maxRating = rs.getMax();
   }
 
   doRateUp(book: Book) {
