@@ -1,4 +1,7 @@
 <h2>Übersicht Bücher ({{ books.length }})</h2>
+<button class="btn btn-yellow" (click)="resetBooks()">
+  Bücher zurücksetzen
+</button>
 <br-book
   *ngFor="let book of books"
   [book]="book"
@@ -6,4 +9,5 @@
   (rateUp)="doRateUp($event)"
   [minRating]="rs.MIN"
   [maxRating]="rs.MAX"
+  (delete)="doDeleteBook($event)"
 ></br-book>

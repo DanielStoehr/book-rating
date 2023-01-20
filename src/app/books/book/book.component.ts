@@ -12,6 +12,7 @@ export class BookComponent {
   @Output() rateDown = new EventEmitter<Book>();
   @Input() minRating?: number;
   @Input() maxRating?: number;
+  @Output() delete = new EventEmitter<Book>();
 
   doRateUp() {
     this.rateUp.emit(this.book);
@@ -19,5 +20,11 @@ export class BookComponent {
 
   doRateDown() {
     this.rateDown.emit(this.book);
+  }
+
+  doDelete() {
+    const q = confirm('Möchtest du das Buch wirklich löschen?');
+    if (!q) return;
+    this.delete.emit(this.book);
   }
 }

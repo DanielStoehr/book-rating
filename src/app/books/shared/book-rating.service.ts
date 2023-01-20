@@ -16,10 +16,4 @@ export class BookRatingService {
     if (book.rating == this.MIN) return book;
     return { ...book, rating: book.rating - 1 };
   }
-  getMax() {
-    return this.MAX;
-  }
-  getMin() {
-    return this.MIN;
-  }
 }

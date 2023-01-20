@@ -31,5 +31,9 @@
     >
       +
     </button>
+
+    <a [routerLink]="['/books', book.isbn]">Details</a>
+    <br /><br />
+    <button class="btn btn-red" (click)="doDelete()">Buch löschen</button>
   </div>
 </div>

@@ -1,0 +1,18 @@
+<p>book-details works</p>
+
+<hr />
+
+<a routerLink="/books">Zum Dashboard</a><br />
+<a routerLink="/books/9783864907791">Angular-Buch</a>
+
+<hr />
+
+<ng-container *ngIf="book">
+  <h2>{{ book.title }}</h2>
+  <p>{{ book.description }}</p>
+  <p>{{ book.price | currency : "EUR" }}</p>
+</ng-container>
+
+<hr />
+
+<pre>{{ book | json }}</pre>

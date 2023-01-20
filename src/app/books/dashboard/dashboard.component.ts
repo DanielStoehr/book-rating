@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'br-dashboard',
@@ -10,23 +11,8 @@ import { BookRatingService } from '../shared/book-rating.service';
 export class DashboardComponent {
   books: Book[] = [];
 
-  constructor(public rs: BookRatingService) {
-    this.books = [
-      {
-        isbn: '123',
-        title: 'Angular',
-        description: 'Das große Praxisbuch',
-        rating: 5,
-        price: 42,
-      },
-      {
-        isbn: '456',
-        title: 'Vue.js',
-        description: 'Das grüne Framework',
-        rating: 3,
-        price: 36.9,
-      },
-    ];
+  constructor(public rs: BookRatingService, private bs: BookStoreService) {
+    this.getBookList();
   }
 
   doRateUp(book: Book) {
@@ -43,6 +29,24 @@ export class DashboardComponent {
     this.books = this.books.map((b) => {
       if (b.isbn === ratedBook.isbn) return ratedBook;
       return b;
+    });
+  }
+
+  private getBookList() {
+    this.bs.getAll().subscribe((books) => {
+      this.books = books;
+    });
+  }
+
+  resetBooks() {
+    this.bs.reset().subscribe(() => {
+      this.getBookList();
+    });
+  }
+
+  doDeleteBook(book: Book) {
+    this.bs.delete(book.isbn).subscribe(() => {
+      this.getBookList();
     });
   }
 }
