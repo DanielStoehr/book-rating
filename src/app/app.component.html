@@ -1,17 +1,20 @@
-<nav>
-  <a
-    routerLink="/books/"
-    class="me-2"
-    routerLinkActive="is-active"
-    [routerLinkActiveOptions]="{ exact: true }"
-    >Dashboard</a
-  >
-  <a routerLink="/books/create" class="me-2" routerLinkActive="is-active"
-    >Buch anlegen</a
-  >
-  <a routerLink="/books/search" class="me-2" routerLinkActive="is-active"
-    >Suche</a
-  >
+<nav class="navigation">
+  <div>
+    <a
+      routerLink="/books/"
+      class="me-2"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Dashboard</a
+    >
+    <a routerLink="/books/create" class="me-2" routerLinkActive="is-active"
+      >Buch anlegen</a
+    >
+    <a routerLink="/books/search" class="me-2" routerLinkActive="is-active"
+      >Suche</a
+    >
+  </div>
+  <p>{{ date | date : "dd.MMM yyyy - HH:mm:ss" }}</p>
 </nav>
 
 <div class="container">
