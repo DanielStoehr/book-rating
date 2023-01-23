@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BooksModule } from './books/books.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -12,9 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BooksModule,
     HttpClientModule, //provideHttpClient() für Standalone Components
-    RouterModule.forChild([{ path: '**', redirectTo: '/books' }]), //Wildcard-Route muss ganz unten stehen
+    // RouterModule.forChild([{ path: '**', redirectTo: '/books' }]), //Wildcard-Route muss ganz unten stehen
   ],
   providers: [],
   bootstrap: [AppComponent],

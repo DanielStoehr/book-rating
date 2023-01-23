@@ -8,6 +8,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   // pathMatch full ist notwendig bei Weiterleitung vom leeren Pfad
+  {
+    path: 'books',
+    loadChildren: () =>
+      import('./books/books.module').then((m) => m.BooksModule),
+  },
 ];
 
 @NgModule({

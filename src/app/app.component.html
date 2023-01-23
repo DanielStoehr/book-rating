@@ -1,3 +1,19 @@
+<nav>
+  <a
+    routerLink="/books/"
+    class="me-2"
+    routerLinkActive="is-active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Dashboard</a
+  >
+  <a routerLink="/books/create" class="me-2" routerLinkActive="is-active"
+    >Buch anlegen</a
+  >
+  <a routerLink="/books/search" class="me-2" routerLinkActive="is-active"
+    >Suche</a
+  >
+</nav>
+
 <div class="container">
   <h1>{{ title }}</h1>
 

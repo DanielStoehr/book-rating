@@ -27,11 +27,11 @@ export class BookStoreService {
     return this.http.get<Book[]>(this.api + '/search/' + term);
   }
 
-  delete(isbn: string) {
+  delete(isbn: string): Observable<unknown> {
     return this.http.delete(this.api + '/books/' + isbn);
   }
 
-  reset() {
+  reset(): Observable<unknown> {
     return this.http.delete(this.api + '/books');
   }
 }
