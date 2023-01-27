@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map, Observable, switchMap } from 'rxjs';
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
 
@@ -9,7 +10,7 @@ import { BookStoreService } from '../shared/book-store.service';
   styleUrls: ['./book-details.component.scss'],
 })
 export class BookDetailsComponent {
-  book?: Book;
+  book$: Observable<Book>;
 
   constructor(private route: ActivatedRoute, private bs: BookStoreService) {
     // PULL / synchroner Weg
@@ -17,12 +18,10 @@ export class BookDetailsComponent {
     // console.log(isbn);
 
     // PUSH / asynchroner Weg
-    // TODO: Verschachtelte Subscriptions vermeiden
-    this.route.paramMap.subscribe((params) => {
-      const isbn = params.get('isbn')!; //Non-Null Assertion
-      this.bs.getSingle(isbn).subscribe((book) => {
-        this.book = book;
-      });
-    });
+
+    this.book$ = this.route.paramMap.pipe(
+      map((params) => params.get('isbn') as string),
+      switchMap((isbn) => this.bs.getSingle(isbn))
+    );
   }
 }

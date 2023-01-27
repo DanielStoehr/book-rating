@@ -1,3 +1,16 @@
 <div class="form-group">
   <input type="text" class="form-control" [formControl]="searchControl" />
 </div>
+
+<p *ngIf="searchControl.value.length < 3">
+  Bitte mindestens 3 Zeichen eingeben!
+</p>
+
+<!-- <ng-container *ngIf="books$ | async as books">
+  <p *ngFor="let book of books">{{ book.title }}</p>
+</ng-container> -->
+
+<ng-container *ngIf="books$ | async as books">
+  <br-book *ngFor="let b of books" [book]="b"></br-book>
+  <p *ngIf="books.length === 0"><i>keine Bücher gefunden...</i></p>
+</ng-container>

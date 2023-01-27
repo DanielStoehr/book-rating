@@ -7,12 +7,10 @@
 
 <hr />
 
-<ng-container *ngIf="book">
+<ng-container *ngIf="book$ | async as book">
   <h2>{{ book.title }}</h2>
   <p>{{ book.description }}</p>
   <p>{{ book.price | currency : "EUR" }}</p>
+
+  <pre>{{ book | json }}</pre>
 </ng-container>
-
-<hr />
-
-<pre>{{ book | json }}</pre>

@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  Observable,
+  switchMap,
+} from 'rxjs';
+import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'br-book-search',
@@ -8,8 +17,14 @@ import { FormControl } from '@angular/forms';
 })
 export class BookSearchComponent {
   searchControl = new FormControl('', { nonNullable: true });
+  books$: Observable<Book[]>;
 
-  constructor() {
-    this.searchControl.valueChanges.subscribe((e) => console.log(e));
+  constructor(private bs: BookStoreService) {
+    this.books$ = this.searchControl.valueChanges.pipe(
+      filter((value) => value.length > 2),
+      debounceTime(1000),
+      distinctUntilChanged(),
+      switchMap((value) => this.bs.search(value))
+    );
   }
 }
